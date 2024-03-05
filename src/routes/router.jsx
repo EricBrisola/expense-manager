@@ -3,7 +3,7 @@ import Home from "../pages/Home";
 import Today from "../pages/Today";
 import LastSevenDays from "../pages/LastSevenDays";
 import LastThirtyDays from "../pages/LastThirtyDays";
-import Dashboard from "../components/Dashboard";
+import Form from "../components/Form";
 
 const router = createBrowserRouter([
   {
@@ -12,7 +12,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Dashboard />,
+        element: <Form />,
       },
       {
         path: "today",

@@ -6,9 +6,7 @@ const Home = () => {
   return (
     <div className=" flex  flex-col h-screen">
       <Navbar />
-      <section className="flex flex-1 bg-purple-400">
-        <Outlet />
-      </section>
+      <Outlet />
       <Footer />
     </div>
   );
