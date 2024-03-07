@@ -1,12 +1,16 @@
 import useExpenses from "../../customHooks/useExpenses";
 
 const Form = () => {
-  const { allExpenses, newExpense, handleExpenseInputs, handleSubmit } =
-    useExpenses();
+  const {
+    allExpenses,
+    expense,
+    dayExpense,
+    handleExpenseInputs,
+    handleSubmit,
+  } = useExpenses();
 
-  console.log(allExpenses);
   return (
-    <section className="flex flex-1 items-center  justify-center bg-purple-400">
+    <section className="flex flex-1 items-center justify-center bg-purple-400 ">
       <article className="flex h-96 w-96 items-center justify-center rounded-md bg-purple-300">
         <form onSubmit={handleSubmit} className="flex flex-col">
           <label htmlFor="new-expense-title-input">
@@ -15,7 +19,7 @@ const Form = () => {
               type="text"
               name="title"
               id="new-expense-title-input"
-              value={newExpense.title}
+              value={expense.title}
               onChange={handleExpenseInputs}
             />
           </label>
@@ -25,7 +29,7 @@ const Form = () => {
               type="number"
               name="value"
               id="new-expense-value-input"
-              value={newExpense.value}
+              value={expense.value}
               onChange={handleExpenseInputs}
             />
           </label>
@@ -34,6 +38,32 @@ const Form = () => {
           </button>
         </form>
       </article>
+      <section className="h-96 w-96 bg-purple-300 text-white">
+        <p>Gastos:</p>
+        {allExpenses ? (
+          allExpenses.map((exp) => {
+            return (
+              <article key={exp.id}>
+                <p>Dia: {exp.date.format("DD/MM/YYYY")}</p>
+                {exp.expenses ? (
+                  exp.expenses.map((e) => {
+                    return (
+                      <div key={e.id}>
+                        <p>{e.title}</p>
+                        <p>R${e.value}</p>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <p>Nenhum gasto nesse dia</p>
+                )}
+              </article>
+            );
+          })
+        ) : (
+          <p>Sem nenhum gasto</p>
+        )}
+      </section>
     </section>
   );
 };
