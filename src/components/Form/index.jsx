@@ -1,13 +1,11 @@
-import useExpenses from "../../customHooks/useExpenses";
+import { ExpensesContext } from "../../contexts/ExpensesContext";
+import { useContext } from "react";
 
 const Form = () => {
-  const {
-    allExpenses,
-    expense,
-    dayExpense,
-    handleExpenseInputs,
-    handleSubmit,
-  } = useExpenses();
+  const { expense, handleSubmit, handleExpenseInputs, allExpenses } =
+    useContext(ExpensesContext);
+
+  console.log(allExpenses);
 
   return (
     <section className="flex flex-1 items-center justify-center bg-purple-400 ">
@@ -38,32 +36,6 @@ const Form = () => {
           </button>
         </form>
       </article>
-      <section className="h-96 w-96 bg-purple-300 text-white">
-        <p>Gastos:</p>
-        {allExpenses ? (
-          allExpenses.map((exp) => {
-            return (
-              <article key={exp.id}>
-                <p>Dia: {exp.date.format("DD/MM/YYYY")}</p>
-                {exp.expenses ? (
-                  exp.expenses.map((e) => {
-                    return (
-                      <div key={e.id}>
-                        <p>{e.title}</p>
-                        <p>R${e.value}</p>
-                      </div>
-                    );
-                  })
-                ) : (
-                  <p>Nenhum gasto nesse dia</p>
-                )}
-              </article>
-            );
-          })
-        ) : (
-          <p>Sem nenhum gasto</p>
-        )}
-      </section>
     </section>
   );
 };
