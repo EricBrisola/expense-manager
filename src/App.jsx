@@ -44,9 +44,22 @@ function App() {
     });
   };
 
+  const dailyTotal =
+    allExpenses.length > 0
+      ? allExpenses.reduce((acc, item) => {
+          return (acc += +item.value);
+        }, 0)
+      : 0;
+
   return (
     <ExpensesContext.Provider
-      value={{ handleSubmit, handleExpenseInputs, allExpenses, expense }}
+      value={{
+        handleSubmit,
+        handleExpenseInputs,
+        allExpenses,
+        expense,
+        dailyTotal,
+      }}
     >
       <RouterProvider router={router} />
     </ExpensesContext.Provider>
