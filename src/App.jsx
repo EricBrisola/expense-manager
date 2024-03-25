@@ -24,7 +24,7 @@ function App() {
       ...prev,
       id: "" + Math.floor(Math.random() * 100000),
       [ev.target.name]: ev.target.value,
-      date: dayjs().format("DD/MM/YYYY"),
+      date: dayjs(),
     }));
   };
 
@@ -44,9 +44,46 @@ function App() {
     });
   };
 
-  const dailyTotal =
+  const dailyExpenses =
     allExpenses.length > 0
-      ? allExpenses.reduce((acc, item) => {
+      ? allExpenses.filter(
+          (exp) =>
+            dayjs(exp.date).format("DD/MM/YYYY") ==
+            dayjs().format("DD/MM/YYYY"),
+        )
+      : [];
+
+  const dailyTotal =
+    dailyExpenses.length > 0
+      ? dailyExpenses.reduce((acc, item) => {
+          return (acc += +item.value);
+        }, 0)
+      : 0;
+
+  const lastSevenDaysExpenses =
+    allExpenses.length > 0
+      ? allExpenses.filter(
+          (exp) => dayjs(exp.date).isAfter(dayjs().subtract(7, "day")) == true,
+        )
+      : [];
+
+  const weeklyTotal =
+    lastSevenDaysExpenses.length > 0
+      ? lastSevenDaysExpenses.reduce((acc, item) => {
+          return (acc += +item.value);
+        }, 0)
+      : 0;
+
+  const lastThirtyDaysExpenses =
+    allExpenses.length > 0
+      ? allExpenses.filter(
+          (exp) => dayjs(exp.date).isAfter(dayjs().subtract(30, "day")) == true,
+        )
+      : [];
+
+  const monthlyTotal =
+    lastThirtyDaysExpenses.length > 0
+      ? lastThirtyDaysExpenses.reduce((acc, item) => {
           return (acc += +item.value);
         }, 0)
       : 0;
@@ -59,6 +96,11 @@ function App() {
         allExpenses,
         expense,
         dailyTotal,
+        dailyExpenses,
+        lastSevenDaysExpenses,
+        weeklyTotal,
+        lastThirtyDaysExpenses,
+        monthlyTotal,
       }}
     >
       <RouterProvider router={router} />

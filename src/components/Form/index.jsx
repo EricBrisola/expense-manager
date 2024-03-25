@@ -5,7 +5,7 @@ const Form = () => {
   const { expense, handleSubmit, handleExpenseInputs, allExpenses } =
     useContext(ExpensesContext);
 
-  console.log(allExpenses);
+  //console.log(allExpenses);
 
   return (
     <section className="flex flex-1 items-center justify-center bg-purple-400 ">
@@ -19,6 +19,7 @@ const Form = () => {
               id="new-expense-title-input"
               value={expense.title}
               onChange={handleExpenseInputs}
+              required
             />
           </label>
           <label htmlFor="new-expense-value-input">
@@ -29,6 +30,7 @@ const Form = () => {
               id="new-expense-value-input"
               value={expense.value}
               onChange={handleExpenseInputs}
+              required
             />
           </label>
           <button className="rounded-md bg-purple-400 p-2 text-white">
