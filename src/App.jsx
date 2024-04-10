@@ -15,8 +15,12 @@ function App() {
   });
 
   useEffect(() => {
-    const expenses = localStorage.getItem("all-expenses");
-    if (expenses) setAllExpenses(JSON.parse(expenses));
+    const fetchAllExpenses = () => {
+      const expenses = localStorage.getItem("all-expenses");
+      if (expenses) setAllExpenses(JSON.parse(expenses));
+    };
+
+    fetchAllExpenses();
   }, []);
 
   const handleExpenseInputs = (ev) => {
@@ -41,6 +45,16 @@ function App() {
       ...expense,
       title: "",
       value: "",
+    });
+  };
+
+  const deleteExpense = (id) => {
+    setAllExpenses(() => {
+      const newAllExpensesArr = allExpenses.filter((exp) => {
+        return exp.id !== id;
+      });
+      localStorage.setItem("all-expenses", JSON.stringify(newAllExpensesArr));
+      return newAllExpensesArr;
     });
   };
 
@@ -93,6 +107,7 @@ function App() {
       value={{
         handleSubmit,
         handleExpenseInputs,
+        deleteExpense,
         allExpenses,
         expense,
         dailyTotal,
