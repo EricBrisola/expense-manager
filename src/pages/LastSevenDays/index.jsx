@@ -3,7 +3,8 @@ import { ExpensesContext } from "../../contexts/ExpensesContext";
 import dayjs from "dayjs";
 
 const LastSevenDays = () => {
-  const { lastSevenDaysExpenses, weeklyTotal } = useContext(ExpensesContext);
+  const { lastSevenDaysExpenses, weeklyTotal, deleteExpense } =
+    useContext(ExpensesContext);
   return (
     <section className=" flex flex-1 flex-col items-center bg-purple-400 text-white">
       <article className="m-2">
@@ -19,7 +20,7 @@ const LastSevenDays = () => {
           <p className="text-xl">R${weeklyTotal}</p>
         </article>
       )}
-      <article className="flex flex-wrap justify-center gap-4 py-4">
+      <article className="m-4 grid grid-cols-7 gap-4">
         {lastSevenDaysExpenses.length >= 1 ? (
           lastSevenDaysExpenses.map((expense) => {
             return (
@@ -38,7 +39,10 @@ const LastSevenDays = () => {
                   <button className="h-6 w-14 rounded-md bg-green-700 px-1">
                     Edit
                   </button>
-                  <button className="h-6 w-14 rounded-md bg-red-800 px-1">
+                  <button
+                    className="h-6 w-14 rounded-md bg-red-800 px-1"
+                    onClick={() => deleteExpense(expense.id)}
+                  >
                     Delete
                   </button>
                 </div>

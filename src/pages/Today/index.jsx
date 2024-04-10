@@ -4,7 +4,8 @@ import { ExpensesContext } from "../../contexts/ExpensesContext";
 import dayjs from "dayjs";
 
 function Today() {
-  const { dailyTotal, dailyExpenses } = useContext(ExpensesContext);
+  const { dailyTotal, dailyExpenses, deleteExpense } =
+    useContext(ExpensesContext);
 
   return (
     <section className=" flex flex-1 flex-col items-center bg-purple-400 text-white">
@@ -17,13 +18,13 @@ function Today() {
           <p className="text-xl">R${dailyTotal}</p>
         </article>
       )}
-      <article className="flex flex-wrap justify-center gap-4 py-4">
+      <article className="m-4 grid grid-cols-7 gap-4">
         {dailyExpenses.length >= 1 ? (
           dailyExpenses.map((expense) => {
             return (
               <article
                 key={expense.id}
-                className="flex h-48 w-48 flex-col items-center justify-between  rounded-md bg-purple-300 shadow-md duration-200 hover:scale-105"
+                className="flex h-48 w-48 flex-col items-center justify-between rounded-md bg-purple-300 shadow-md duration-200 hover:scale-105"
               >
                 <p className="w-full rounded-t-md bg-purple-200 p-1 text-center text-xl font-bold">
                   {expense.title[0].toUpperCase() +
@@ -36,7 +37,10 @@ function Today() {
                   <button className="h-6 w-14 rounded-md bg-green-700 px-1">
                     Edit
                   </button>
-                  <button className="h-6 w-14 rounded-md bg-red-800 px-1">
+                  <button
+                    className="h-6 w-14 rounded-md bg-red-800 px-1"
+                    onClick={() => deleteExpense(expense.id)}
+                  >
                     Delete
                   </button>
                 </div>
