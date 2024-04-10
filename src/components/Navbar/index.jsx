@@ -2,9 +2,9 @@ import NavbarBtn from "../NavbarBtn";
 
 const Navbar = () => {
   const navButtonStyle =
-    "text-white text-base flex flex-2 items-center tracking-wide hover:text-purple-500 duration-200";
+    "text-white text-base flex flex-2 items-center tracking-wide hover:bg-purple-100 duration-200 p-2 rounded-md";
   return (
-    <nav className="flex w-full bg-purple-200 px-6 py-3">
+    <nav className="flex w-full bg-purple-200 px-6 py-1">
       <NavbarBtn
         textContent={"Expense manager"}
         path={"/"}
