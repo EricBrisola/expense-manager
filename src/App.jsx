@@ -11,8 +11,9 @@ function App() {
     id: "",
     title: "",
     value: "",
-    date: "",
+    date: dayjs().format("YYYY-MM-DD"),
   });
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchAllExpenses = () => {
@@ -23,12 +24,19 @@ function App() {
     fetchAllExpenses();
   }, []);
 
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   const handleExpenseInputs = (ev) => {
     setExpense((prev) => ({
       ...prev,
       id: "" + Math.floor(Math.random() * 100000),
       [ev.target.name]: ev.target.value,
-      date: dayjs(),
     }));
   };
 
@@ -45,6 +53,7 @@ function App() {
       ...expense,
       title: "",
       value: "",
+      date: dayjs().format("YYYY-MM-DD"),
     });
   };
 
@@ -57,6 +66,17 @@ function App() {
       return newAllExpensesArr;
     });
   };
+
+  // const saveChosenDate = () => {
+  //   setExpense((prev) => ({
+  //     ...prev,
+  //     date: dayjs(customDate).format("YYYY-MM-DD"),
+  //   }));
+  // };
+
+  // const hadleCustomDate = (event) => {
+  //   setCustomDate(event.target.value);
+  // };
 
   const dailyExpenses =
     allExpenses.length > 0
@@ -107,6 +127,8 @@ function App() {
       value={{
         handleSubmit,
         handleExpenseInputs,
+        openModal,
+        closeModal,
         deleteExpense,
         allExpenses,
         expense,
@@ -116,6 +138,7 @@ function App() {
         weeklyTotal,
         lastThirtyDaysExpenses,
         monthlyTotal,
+        isModalOpen,
       }}
     >
       <RouterProvider router={router} />
