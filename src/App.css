@@ -1,0 +1,15 @@
+#oldExpense {
+  height: 1.2rem;
+  width: 1.2rem;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: 2px solid #9a95ae;
+  border-radius: 0.25rem;
+  outline: none;
+  cursor: pointer;
+}
+
+#oldExpense:checked {
+  background-color: #443c68;
+}
