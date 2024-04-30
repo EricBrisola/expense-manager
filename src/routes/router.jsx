@@ -3,6 +3,7 @@ import Home from "../pages/Home";
 import Today from "../pages/Today";
 import LastSevenDays from "../pages/LastSevenDays";
 import LastThirtyDays from "../pages/LastThirtyDays";
+import AllExpenses from "../pages/AllExpenses";
 import Form from "../components/Form";
 
 const router = createBrowserRouter([
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "last-thirty-days",
         element: <LastThirtyDays />,
+      },
+      {
+        path: "all-expenses",
+        element: <AllExpenses />,
       },
     ],
   },
