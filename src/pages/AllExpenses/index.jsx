@@ -1,31 +1,34 @@
 import { useContext } from "react";
 import { ExpensesContext } from "../../contexts/ExpensesContext";
 import dayjs from "dayjs";
-import isoWeek from "dayjs/plugin/isoWeek";
+import dayOfYear from "dayjs/plugin/dayOfYear";
 
-dayjs.extend(isoWeek);
+dayjs.extend(dayOfYear);
 
-const LastSevenDays = () => {
-  const { lastSevenDaysExpenses, weeklyTotal, deleteExpense } =
+const AllExpenses = () => {
+  const { allExpenses, allExpensesTotal, deleteExpense } =
     useContext(ExpensesContext);
+
   return (
-    <section className="flex flex-1 flex-col items-center bg-purple-400 text-white">
+    <section className=" flex flex-1 flex-col items-center bg-purple-400 text-white">
       <article className="m-2">
-        <h1 className="text-3xl">
-          {dayjs().startOf("week").format("DD/MM/YYYY") +
+        <h1 className="text-3xl text-white">
+          {dayjs()
+            .subtract(dayjs(dayjs()).dayOfYear() - 1, "day")
+            .format("DD/MM/YYYY") +
             " - " +
             dayjs().format("DD/MM/YYYY")}
         </h1>
       </article>
-      {lastSevenDaysExpenses.length >= 1 && (
+      {allExpenses.length >= 1 && (
         <article className="h-25 m-2 flex w-60 flex-col items-center gap-3 rounded-md bg-purple-950 p-2">
-          <p className="text-2xl">Weekly value</p>
-          <p className="text-xl">R${weeklyTotal.toFixed(2)}</p>
+          <p className="text-2xl">Total expense:</p>
+          <p className="text-xl">R${allExpensesTotal.toFixed(2)}</p>
         </article>
       )}
       <article className="m-4 grid grid-cols-7 gap-4">
-        {lastSevenDaysExpenses.length >= 1 ? (
-          lastSevenDaysExpenses.map((expense) => {
+        {allExpenses.length >= 1 ? (
+          allExpenses.map((expense) => {
             return (
               <article
                 key={expense.id}
@@ -38,12 +41,12 @@ const LastSevenDays = () => {
                 <p className="text-md text-2xl font-medium">
                   R${expense.value}
                 </p>
-                <div className="flex w-full justify-center  gap-5 rounded-b-md bg-purple-950 py-2">
+                <div className="flex w-full justify-center gap-5 rounded-b-md bg-purple-950 py-2">
                   <button className="h-6 w-14 rounded-md bg-green-700 px-1">
                     Edit
                   </button>
                   <button
-                    className="h-6 w-14 rounded-md bg-red-800 px-1"
+                    className="h-6 w-14 rounded-md bg-red-800 px-1 text-white"
                     onClick={() => deleteExpense(expense.id)}
                   >
                     Delete
@@ -54,7 +57,7 @@ const LastSevenDays = () => {
           })
         ) : (
           <p className="col-span-7 text-2xl font-normal">
-            No expenses made in this week yet
+            No expenses made at all
           </p>
         )}
       </article>
@@ -62,4 +65,4 @@ const LastSevenDays = () => {
   );
 };
 
-export default LastSevenDays;
+export default AllExpenses;
