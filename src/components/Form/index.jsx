@@ -24,7 +24,7 @@ const Form = () => {
             <input
               type="text"
               name="title"
-              className="h-10 w-56 rounded-md border-[1px] border-purple-100 bg-transparent p-3 outline-none focus:border-2 focus:border-purple-300"
+              className="h-10 w-56 rounded-md border-[1px] border-purple-950 bg-transparent p-3 outline-none focus:border-2 focus:border-purple-300"
               id="new-expense-title-input"
               value={expense.title}
               onChange={handleExpenseInputs}
@@ -40,7 +40,7 @@ const Form = () => {
             <input
               type="number"
               name="value"
-              className="h-10 w-56 rounded-md border-[1px] border-purple-100 bg-transparent p-3 outline-none focus:border-2 focus:border-purple-300"
+              className="h-10 w-56 rounded-md border-[1px] border-purple-950 bg-transparent p-3 outline-none focus:border-2"
               id="new-expense-value-input"
               value={expense.value}
               onChange={handleExpenseInputs}
@@ -56,13 +56,13 @@ const Form = () => {
               id="new-expense-date-input"
               type="date"
               name="date"
-              className="h-10 w-56 rounded border-[1px] border-purple-100 bg-transparent p-3 outline-none focus:border-2 focus:border-purple-300"
+              className="h-10 w-56 rounded border-[1px] border-purple-950 bg-transparent p-3 outline-none focus:border-2"
               onChange={handleExpenseInputs}
               value={expense.date}
               max={dayjs().format("YYYY-MM-DD")}
             />
           </div>
-          <button className="rounded-md bg-purple-200 p-2 text-white shadow-sm shadow-purple-100/20 duration-200 hover:shadow-lg hover:shadow-purple-100/40">
+          <button className="rounded-md bg-purple-950 p-2 text-white shadow-sm shadow-purple-100/20 duration-200 hover:shadow-lg hover:shadow-purple-100/40">
             Add
           </button>
         </form>
