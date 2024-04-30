@@ -122,6 +122,13 @@ function App() {
         }, 0)
       : 0;
 
+  const allExpensesTotal =
+    allExpenses.length > 0
+      ? allExpenses.reduce((acc, item) => {
+          return (acc += +item.value);
+        }, 0)
+      : 0;
+
   return (
     <ExpensesContext.Provider
       value={{
@@ -139,6 +146,7 @@ function App() {
         lastThirtyDaysExpenses,
         monthlyTotal,
         isModalOpen,
+        allExpensesTotal,
       }}
     >
       <RouterProvider router={router} />
