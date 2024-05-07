@@ -1,4 +1,4 @@
-#oldExpense {
+.filters {
   height: 1.2rem;
   width: 1.2rem;
   appearance: none;
@@ -10,6 +10,6 @@
   cursor: pointer;
 }
 
-#oldExpense:checked {
+.filters:checked {
   background-color: #443c68;
 }
