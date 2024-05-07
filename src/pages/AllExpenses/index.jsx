@@ -10,58 +10,135 @@ const AllExpenses = () => {
     useContext(ExpensesContext);
 
   return (
-    <section className=" flex flex-1 flex-col items-center bg-purple-400 text-white">
-      <article className="m-2">
-        <h1 className="text-3xl text-white">
-          {dayjs()
-            .subtract(dayjs(dayjs()).dayOfYear() - 1, "day")
-            .format("DD/MM/YYYY") +
-            " - " +
-            dayjs().format("DD/MM/YYYY")}
-        </h1>
-      </article>
-      {allExpenses.length >= 1 && (
-        <article className="h-25 m-2 flex w-60 flex-col items-center gap-3 rounded-md bg-purple-950 p-2">
-          <p className="text-2xl">Total expense:</p>
-          <p className="text-xl">R${allExpensesTotal.toFixed(2)}</p>
-        </article>
-      )}
-      <article className="m-4 grid grid-cols-7 gap-4">
-        {allExpenses.length >= 1 ? (
-          allExpenses.map((expense) => {
-            return (
-              <article
-                key={expense.id}
-                className="flex h-48 w-48 flex-col items-center justify-between rounded-md bg-[#260D39] shadow-lg duration-200 hover:scale-105"
+    <main className="flex flex-1 items-center bg-purple-400 text-white">
+      <aside className="flex h-full items-center">
+        <article className="flex h-96 w-52 flex-col justify-around rounded-br-md rounded-tr-md bg-zinc-300 text-black">
+          <article className="flex flex-col items-center gap-2">
+            <p className="text-xl font-semibold">Filter by Months</p>
+            <select className="w-36 rounded border-[1px] border-purple-950 bg-transparent p-3 outline-none focus:border-2">
+              <option value="">January</option>
+              <option value="">February</option>
+              <option value="">March</option>
+              <option value="">April</option>
+              <option value="">May</option>
+              <option value="">June</option>
+              <option value="">July</option>
+              <option value="">August</option>
+              <option value="">September</option>
+              <option value="">October</option>
+              <option value="">November</option>
+              <option value="">December</option>
+            </select>
+          </article>
+          <article className="flex flex-col items-center gap-2">
+            <p className="text-xl font-semibold">Filter by category</p>
+            <div className="flex flex-col items-start gap-2 ">
+              <label htmlFor="food" className="flex flex-row-reverse gap-1">
+                Alimentação
+                <input type="checkbox" name="" id="food" className="filters" />
+              </label>
+              <label
+                htmlFor="transport"
+                className="flex flex-row-reverse gap-1"
               >
-                <p className="w-full rounded-t-md bg-purple-950 p-1 text-center text-xl font-bold">
-                  {expense.title[0].toUpperCase() +
-                    expense.title.slice(1, expense.title.length)}
-                </p>
-                <p className="text-md text-2xl font-medium">
-                  R${expense.value}
-                </p>
-                <div className="flex w-full justify-center gap-5 rounded-b-md bg-purple-950 py-2">
-                  <button className="h-6 w-14 rounded-md bg-green-700 px-1">
-                    Edit
-                  </button>
-                  <button
-                    className="h-6 w-14 rounded-md bg-red-800 px-1 text-white"
-                    onClick={() => deleteExpense(expense.id)}
-                  >
-                    Delete
-                  </button>
-                </div>
-              </article>
-            );
-          })
-        ) : (
-          <p className="col-span-7 text-2xl font-normal">
-            No expenses made at all
-          </p>
-        )}
-      </article>
-    </section>
+                Transporte
+                <input
+                  type="checkbox"
+                  name=""
+                  id="transport"
+                  className="filters"
+                />
+              </label>
+              <label
+                htmlFor="entertainment"
+                className="flex flex-row-reverse gap-1"
+              >
+                Lazer
+                <input
+                  type="checkbox"
+                  name=""
+                  id="entertainment"
+                  className="filters"
+                />
+              </label>
+              <label htmlFor="home" className="flex flex-row-reverse gap-1">
+                Moradia
+                <input type="checkbox" name="" id="home" className="filters" />
+              </label>
+              <label htmlFor="health" className="flex flex-row-reverse gap-1">
+                Saúde
+                <input
+                  type="checkbox"
+                  name=""
+                  id="health"
+                  className="filters"
+                />
+              </label>
+            </div>
+          </article>
+          <article className=" flex justify-center gap-3">
+            <button className="rounded-md bg-red-800 px-3 py-1 text-white duration-200 hover:shadow-lg hover:shadow-red-800/40">
+              Clean
+            </button>
+            <button className="rounded-md bg-green-700 px-3 py-1 text-white  duration-200 hover:shadow-lg hover:shadow-green-800/40">
+              Filter
+            </button>
+          </article>
+        </article>
+      </aside>
+      <section>
+        <article className="m-2 flex flex-col items-center gap-2">
+          <h1 className="text-3xl text-white">
+            {dayjs()
+              .subtract(dayjs(dayjs()).dayOfYear() - 1, "day")
+              .format("DD/MM/YYYY") +
+              " - " +
+              dayjs().format("DD/MM/YYYY")}
+          </h1>
+          {allExpenses.length >= 1 && (
+            <article className="h-25 m-2 flex w-60 flex-col items-center gap-3 rounded-md bg-purple-950 p-2">
+              <p className="text-2xl">Total expense:</p>
+              <p className="text-xl">R${allExpensesTotal.toFixed(2)}</p>
+            </article>
+          )}
+        </article>
+        <article className="m-4 grid grid-cols-6 gap-4">
+          {allExpenses.length >= 1 ? (
+            allExpenses.map((expense) => {
+              return (
+                <article
+                  key={expense.id}
+                  className="flex h-48 w-48 flex-col items-center justify-between rounded-md bg-[#260D39] shadow-lg duration-200 hover:scale-105"
+                >
+                  <p className="w-full rounded-t-md bg-purple-950 p-1 text-center text-xl font-bold">
+                    {expense.title[0].toUpperCase() +
+                      expense.title.slice(1, expense.title.length)}
+                  </p>
+                  <p className="text-md text-2xl font-medium">
+                    R${expense.value}
+                  </p>
+                  <div className="flex w-full justify-center gap-5 rounded-b-md bg-purple-950 py-2">
+                    <button className="h-6 w-14 rounded-md bg-green-700 px-1">
+                      Edit
+                    </button>
+                    <button
+                      className="h-6 w-14 rounded-md bg-red-800 px-1 text-white"
+                      onClick={() => deleteExpense(expense.id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </article>
+              );
+            })
+          ) : (
+            <p className="col-span-7 text-2xl font-normal">
+              No expenses made at all
+            </p>
+          )}
+        </article>
+      </section>
+    </main>
   );
 };
 
