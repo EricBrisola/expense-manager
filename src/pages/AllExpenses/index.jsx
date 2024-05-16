@@ -34,14 +34,14 @@ const AllExpenses = () => {
             <p className="text-xl font-semibold">Filter by category</p>
             <div className="flex flex-col items-start gap-2 ">
               <label htmlFor="food" className="flex flex-row-reverse gap-1">
-                Alimentação
+                Food
                 <input type="checkbox" name="" id="food" className="filters" />
               </label>
               <label
                 htmlFor="transport"
                 className="flex flex-row-reverse gap-1"
               >
-                Transporte
+                Transport
                 <input
                   type="checkbox"
                   name=""
@@ -53,7 +53,7 @@ const AllExpenses = () => {
                 htmlFor="entertainment"
                 className="flex flex-row-reverse gap-1"
               >
-                Lazer
+                Enterteinment
                 <input
                   type="checkbox"
                   name=""
@@ -62,11 +62,11 @@ const AllExpenses = () => {
                 />
               </label>
               <label htmlFor="home" className="flex flex-row-reverse gap-1">
-                Moradia
+                Home
                 <input type="checkbox" name="" id="home" className="filters" />
               </label>
               <label htmlFor="health" className="flex flex-row-reverse gap-1">
-                Saúde
+                Health
                 <input
                   type="checkbox"
                   name=""
@@ -86,8 +86,8 @@ const AllExpenses = () => {
           </article>
         </article>
       </aside>
-      <section>
-        <article className="m-2 flex flex-col items-center gap-2">
+      <section className="ml-6 flex h-full flex-col gap-3 p-4">
+        <article className="flex flex-col items-center gap-2">
           <h1 className="text-3xl text-white">
             {dayjs()
               .subtract(dayjs(dayjs()).dayOfYear() - 1, "day")
@@ -96,13 +96,13 @@ const AllExpenses = () => {
               dayjs().format("DD/MM/YYYY")}
           </h1>
           {allExpenses.length >= 1 && (
-            <article className="h-25 m-2 flex w-60 flex-col items-center gap-3 rounded-md bg-purple-950 p-2">
+            <article className="h-25 flex w-60 flex-col items-center gap-3 rounded-md bg-purple-950 p-2">
               <p className="text-2xl">Total expense:</p>
               <p className="text-xl">R${allExpensesTotal.toFixed(2)}</p>
             </article>
           )}
         </article>
-        <article className="m-4 grid grid-cols-6 gap-4">
+        <article className="grid grid-cols-6 gap-4">
           {allExpenses.length >= 1 ? (
             allExpenses.map((expense) => {
               return (
