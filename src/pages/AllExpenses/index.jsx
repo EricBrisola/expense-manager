@@ -15,7 +15,7 @@ const AllExpenses = () => {
         <article className="flex h-96 w-52 flex-col justify-around rounded-br-md rounded-tr-md bg-zinc-300 text-black">
           <article className="flex flex-col items-center gap-2">
             <p className="text-xl font-semibold">Filter by Months</p>
-            <select className="w-36 rounded border-[1px] border-purple-950 bg-transparent p-3 outline-none focus:border-2">
+            <select className="h-12 w-36 rounded border-[1px] border-purple-950 bg-transparent p-3 outline-none focus:border-2">
               <option value="">January</option>
               <option value="">February</option>
               <option value="">March</option>
@@ -102,7 +102,7 @@ const AllExpenses = () => {
             </article>
           )}
         </article>
-        <article className="grid grid-cols-6 gap-4">
+        <article className="grid grid-cols-6 gap-4 bg-slate-500">
           {allExpenses.length >= 1 ? (
             allExpenses.map((expense) => {
               return (
