@@ -89,7 +89,7 @@ const AllExpenses = () => {
               })
             ) : (
               <p className="mr-48 flex w-full items-center justify-center text-2xl font-normal text-[#102a42]">
-                No expenses made at all
+                Sem gastos registrados
               </p>
             )}
           </div>

@@ -11,23 +11,19 @@ const Navbar = () => {
         style={"text-white text-2xl flex flex-1 tracking-wide"}
       />
       <article className="flex gap-6">
+        <NavbarBtn textContent={"Hoje"} path={"today"} style={navButtonStyle} />
         <NavbarBtn
-          textContent={"Today"}
-          path={"today"}
-          style={navButtonStyle}
-        />
-        <NavbarBtn
-          textContent={"Last 7 days"}
+          textContent={"Semanal"}
           path={"last-seven-days"}
           style={navButtonStyle}
         />
         <NavbarBtn
-          textContent={"Last 30 days"}
+          textContent={"Mensal"}
           path={"last-thirty-days"}
           style={navButtonStyle}
         />
         <NavbarBtn
-          textContent={"All expenses"}
+          textContent={"Todos gastos"}
           path={"all-expenses"}
           style={navButtonStyle}
         />
