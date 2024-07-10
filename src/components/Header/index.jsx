@@ -1,6 +1,6 @@
 const Header = ({ total, date }) => {
   return (
-    <header className="flex justify-center py-3">
+    <header className="flex justify-center py-4">
       <article className="flex flex-col items-center gap-3">
         <h1 className="text-3xl leading-none tracking-widest text-[#102a42]">
           {date}
