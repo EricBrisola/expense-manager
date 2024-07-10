@@ -51,30 +51,34 @@ const AllExpenses = () => {
   ];
 
   return (
-    <main className="flex flex-1 flex-col gap-3 bg-[#E2DEE9] text-white">
-      <Header
-        total={allExpensesTotal}
-        date={
-          dayjs()
-            .subtract(dayjs(dayjs()).dayOfYear() - 1, "day")
-            .format("DD/MM/YYYY") +
-          " - " +
-          dayjs().format("DD/MM/YYYY")
-        }
-      />
-      <section className="flex flex-1 gap-3">
-        <Sidebar categories={categories}>
-          <article className="flex flex-col items-center gap-2">
-            <p className="text-xl font-semibold">Meses</p>
-            <select className="h-12 w-36 rounded border-[1px] border-[#645cff] bg-transparent p-2 outline-none focus:border-2">
-              {months.map((month) => {
-                return <option value={month.value}>{month.month}</option>;
-              })}
-            </select>
-          </article>
-        </Sidebar>
-        <article className="flex flex-1 justify-center pb-3">
-          <div className="flex w-4/5 flex-wrap gap-6">
+    <main className="flex flex-1 bg-[#E2DEE9] text-white">
+      <Sidebar categories={categories}>
+        <article className="flex flex-col items-center gap-2">
+          <p className="text-xl font-semibold">Meses</p>
+          <select className="h-12 w-36 rounded border-[1px] border-[#645cff] bg-transparent p-2 outline-none focus:border-2">
+            {months.map((month) => {
+              return (
+                <option value={month.value} key={month.value}>
+                  {month.month}
+                </option>
+              );
+            })}
+          </select>
+        </article>
+      </Sidebar>
+      <section className="flex flex-1 flex-col gap-3">
+        <Header
+          total={allExpensesTotal}
+          date={
+            dayjs()
+              .subtract(dayjs(dayjs()).dayOfYear() - 1, "day")
+              .format("DD/MM/YYYY") +
+            " - " +
+            dayjs().format("DD/MM/YYYY")
+          }
+        />
+        <article className="flex justify-center pb-7">
+          <div className="flex w-2/4 flex-wrap gap-6 pl-[9%]">
             {allExpenses.length >= 1 ? (
               allExpenses.map((expense) => {
                 return (
@@ -88,7 +92,7 @@ const AllExpenses = () => {
                 );
               })
             ) : (
-              <p className="mr-48 flex w-full items-center justify-center text-2xl font-normal text-[#102a42]">
+              <p className="flex w-4/5 justify-center pr-3 text-2xl font-normal text-[#102a42]">
                 Sem gastos registrados
               </p>
             )}
