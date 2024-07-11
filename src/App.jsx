@@ -11,6 +11,7 @@ function App() {
     id: "",
     title: "",
     value: "",
+    category: "",
     date: dayjs().format("YYYY-MM-DD"),
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -53,6 +54,7 @@ function App() {
       ...expense,
       title: "",
       value: "",
+      category: "",
       date: dayjs().format("YYYY-MM-DD"),
     });
   };
@@ -78,6 +80,29 @@ function App() {
   //   setCustomDate(event.target.value);
   // };
 
+  const categories = [
+    {
+      name: "Comida",
+      value: "food",
+    },
+    {
+      name: "Transporte",
+      value: "transport",
+    },
+    {
+      name: "Entretenimento",
+      value: "enterteinment",
+    },
+    {
+      name: "Moradia",
+      value: "home",
+    },
+    {
+      name: "Saúde",
+      value: "health",
+    },
+  ];
+
   const dailyExpenses =
     allExpenses.length > 0
       ? allExpenses.filter(
@@ -97,7 +122,7 @@ function App() {
   const lastSevenDaysExpenses =
     allExpenses.length > 0
       ? allExpenses.filter(
-          (exp) => dayjs(exp.date).isAfter(dayjs().subtract(7, "day")) == true,
+          (exp) => dayjs(exp.date).isAfter(dayjs().startOf("week")) == true,
         )
       : [];
 
@@ -111,7 +136,7 @@ function App() {
   const lastThirtyDaysExpenses =
     allExpenses.length > 0
       ? allExpenses.filter(
-          (exp) => dayjs(exp.date).isAfter(dayjs().subtract(30, "day")) == true,
+          (exp) => dayjs(exp.date).isAfter(dayjs().startOf("month")) == true,
         )
       : [];
 
@@ -147,6 +172,7 @@ function App() {
         monthlyTotal,
         isModalOpen,
         allExpensesTotal,
+        categories,
       }}
     >
       <RouterProvider router={router} />
