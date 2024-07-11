@@ -1,10 +1,9 @@
 import { ExpensesContext } from "../../contexts/ExpensesContext";
 import { useContext } from "react";
-import Modal from "../Modal";
 import dayjs from "dayjs";
 
 const Form = () => {
-  const { expense, handleSubmit, handleExpenseInputs } =
+  const { expense, handleSubmit, handleExpenseInputs, categories } =
     useContext(ExpensesContext);
 
   //console.log(allExpenses);
@@ -16,17 +15,17 @@ const Form = () => {
       <p className="text-2xl leading-none tracking-widest text-[#102a42]">
         Registre seus gastos!
       </p>
-      <article className="flex h-[27rem] w-80 items-center justify-center rounded-md bg-[#F7F6FA] shadow-lg">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+      <article className="flex w-80 items-center justify-center rounded-md bg-[#F7F6FA] shadow-lg">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-6 py-6">
           <label
             htmlFor="new-expense-title-input"
-            className="flex flex-col gap-3"
+            className="flex flex-col gap-4"
           >
-            <p className="text-lg font-semibold">Gasto</p>
+            <p className="text-lg font-semibold leading-none">Gasto</p>
             <input
               type="text"
               name="title"
-              className="h-10 w-56 rounded-md border-[1px] border-[#645cff] bg-transparent p-3 outline-none focus:border-2"
+              className="h-12 w-56 rounded-md border-[1px] border-[#645cff] bg-transparent p-3 outline-none focus:border-2"
               id="new-expense-title-input"
               value={expense.title}
               onChange={handleExpenseInputs}
@@ -36,13 +35,13 @@ const Form = () => {
           </label>
           <label
             htmlFor="new-expense-value-input"
-            className="flex flex-col gap-3"
+            className="flex flex-col gap-4"
           >
-            <p className="text-lg font-semibold">Valor</p>
+            <p className="text-lg font-semibold leading-none">Valor</p>
             <input
               type="number"
               name="value"
-              className="h-10 w-56 rounded-md border-[1px] border-[#645cff] bg-transparent p-3 outline-none focus:border-2"
+              className="h-12 w-56 rounded-md border-[1px] border-[#645cff] bg-transparent p-3 outline-none focus:border-2"
               id="new-expense-value-input"
               value={expense.value}
               onChange={handleExpenseInputs}
@@ -52,13 +51,35 @@ const Form = () => {
               step={0.01}
             />
           </label>
-          <div className="flex flex-col gap-3">
-            <p className="text-lg font-semibold">Data</p>
+          <label
+            htmlFor="new-expense-category-input"
+            className="flex flex-col gap-4"
+          >
+            <p className="text-lg font-semibold leading-none">Categoria</p>
+            <select
+              name="category"
+              className="h-12 w-56 rounded-md border-[1px] border-[#645cff] bg-transparent p-3 outline-none focus:border-2"
+              id="new-expense-category-input"
+              value={expense.category}
+              onChange={handleExpenseInputs}
+              required
+            >
+              {categories.map((category) => {
+                return (
+                  <option value={category.value} key={category.value}>
+                    {category.name}
+                  </option>
+                );
+              })}
+            </select>
+          </label>
+          <div className="flex flex-col gap-4">
+            <p className="text-lg font-semibold leading-none">Data</p>
             <input
               id="new-expense-date-input"
               type="date"
               name="date"
-              className="h-10 w-56 rounded border-[1px] border-[#645cff] bg-transparent p-3 outline-none focus:border-2"
+              className="h-12 w-56 rounded border-[1px] border-[#645cff] bg-transparent p-3 outline-none focus:border-2"
               onChange={handleExpenseInputs}
               value={expense.date}
               max={dayjs().format("YYYY-MM-DD")}
