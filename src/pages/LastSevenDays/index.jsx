@@ -9,31 +9,9 @@ import Sidebar from "../../components/Sidebar";
 dayjs.extend(isoWeek);
 
 const LastSevenDays = () => {
-  const { lastSevenDaysExpenses, weeklyTotal, deleteExpense } =
+  const { lastSevenDaysExpenses, weeklyTotal, deleteExpense, categories } =
     useContext(ExpensesContext);
 
-  const categories = [
-    {
-      name: "Comida",
-      value: "food",
-    },
-    {
-      name: "Transporte",
-      value: "transport",
-    },
-    {
-      name: "Entretenimento",
-      value: "enterteinment",
-    },
-    {
-      name: "Moradia",
-      value: "home",
-    },
-    {
-      name: "Saúde",
-      value: "health",
-    },
-  ];
   return (
     <main className="flex flex-1 bg-[#E2DEE9] text-white">
       <Sidebar categories={categories} />
@@ -47,7 +25,7 @@ const LastSevenDays = () => {
           }
         />
         <article className="flex justify-center pb-7">
-          <div className="flex w-2/4 flex-wrap gap-6 pl-[9%]">
+          <div className="flex w-full flex-wrap gap-6 px-9">
             {lastSevenDaysExpenses.length >= 1 ? (
               lastSevenDaysExpenses.map((expense) => {
                 return (
@@ -61,7 +39,7 @@ const LastSevenDays = () => {
                 );
               })
             ) : (
-              <p className="flex w-4/5 justify-center pr-3 text-2xl font-normal text-[#102a42]">
+              <p className="flex w-full justify-center text-2xl font-normal text-[#102a42]">
                 Sem gastos nessa semana
               </p>
             )}

@@ -7,31 +7,8 @@ import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 
 function Today() {
-  const { dailyTotal, dailyExpenses, deleteExpense } =
+  const { dailyTotal, dailyExpenses, deleteExpense, categories } =
     useContext(ExpensesContext);
-
-  const categories = [
-    {
-      name: "Comida",
-      value: "food",
-    },
-    {
-      name: "Transporte",
-      value: "transport",
-    },
-    {
-      name: "Entretenimento",
-      value: "enterteinment",
-    },
-    {
-      name: "Moradia",
-      value: "home",
-    },
-    {
-      name: "Saúde",
-      value: "health",
-    },
-  ];
 
   return (
     <main className="flex flex-1 bg-[#E2DEE9] text-white">
@@ -39,7 +16,7 @@ function Today() {
       <section className="flex flex-1 flex-col gap-3">
         <Header total={dailyTotal} date={dayjs().format("DD/MM/YYYY")} />
         <article className="flex justify-center pb-7">
-          <div className="flex w-2/4 flex-wrap gap-6 pl-[9%]">
+          <div className="flex w-full flex-wrap gap-6 px-9">
             {dailyExpenses.length >= 1 ? (
               dailyExpenses.map((expense) => {
                 return (
@@ -53,7 +30,7 @@ function Today() {
                 );
               })
             ) : (
-              <p className="flex w-4/5 justify-center pr-3 text-2xl font-normal text-[#102a42]">
+              <p className="flex w-full justify-center text-2xl font-normal text-[#102a42]">
                 Sem gastos registrados hoje
               </p>
             )}

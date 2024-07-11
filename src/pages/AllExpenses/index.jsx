@@ -9,7 +9,7 @@ import Sidebar from "../../components/Sidebar";
 dayjs.extend(dayOfYear);
 
 const AllExpenses = () => {
-  const { allExpenses, allExpensesTotal, deleteExpense } =
+  const { allExpenses, allExpensesTotal, deleteExpense, categories } =
     useContext(ExpensesContext);
 
   const months = [
@@ -25,29 +25,6 @@ const AllExpenses = () => {
     { month: "Outubro", value: "10" },
     { month: "Novembro", value: "11" },
     { month: "Dezembro", value: "12" },
-  ];
-
-  const categories = [
-    {
-      name: "Comida",
-      value: "food",
-    },
-    {
-      name: "Transporte",
-      value: "transport",
-    },
-    {
-      name: "Entretenimento",
-      value: "enterteinment",
-    },
-    {
-      name: "Moradia",
-      value: "home",
-    },
-    {
-      name: "Saúde",
-      value: "health",
-    },
   ];
 
   return (
@@ -78,7 +55,7 @@ const AllExpenses = () => {
           }
         />
         <article className="flex justify-center pb-7">
-          <div className="flex w-2/4 flex-wrap gap-6 pl-[9%]">
+          <div className="flex w-full flex-wrap gap-6 px-9">
             {allExpenses.length >= 1 ? (
               allExpenses.map((expense) => {
                 return (
@@ -92,7 +69,7 @@ const AllExpenses = () => {
                 );
               })
             ) : (
-              <p className="flex w-4/5 justify-center pr-3 text-2xl font-normal text-[#102a42]">
+              <p className="flex w-full justify-center text-2xl font-normal text-[#102a42]">
                 Sem gastos registrados
               </p>
             )}

@@ -6,31 +6,24 @@ import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 
 function LastThirtyDays() {
-  const { lastThirtyDaysExpenses, monthlyTotal, deleteExpense } =
+  const { lastThirtyDaysExpenses, monthlyTotal, deleteExpense, categories } =
     useContext(ExpensesContext);
 
-  const categories = [
-    {
-      name: "Comida",
-      value: "food",
-    },
-    {
-      name: "Transporte",
-      value: "transport",
-    },
-    {
-      name: "Entretenimento",
-      value: "enterteinment",
-    },
-    {
-      name: "Moradia",
-      value: "home",
-    },
-    {
-      name: "Saúde",
-      value: "health",
-    },
-  ];
+  const months = {
+    1: "janeiro",
+    2: "fevereiro",
+    3: "março",
+    4: "abril",
+    5: "maio",
+    6: "junho",
+    7: "julho",
+    8: "agosto",
+    9: "setembro",
+    10: "outubro",
+    11: "novembro",
+    12: "dezembro",
+  };
+
   return (
     <main className="flex flex-1 bg-[#E2DEE9] text-white">
       <Sidebar categories={categories} />
@@ -44,7 +37,7 @@ function LastThirtyDays() {
           }
         />
         <article className="flex justify-center pb-7">
-          <div className="flex w-2/4 flex-wrap gap-6 pl-[9%]">
+          <div className="flex w-full flex-wrap gap-6 px-9">
             {lastThirtyDaysExpenses.length >= 1 ? (
               lastThirtyDaysExpenses.map((expense) => {
                 return (
@@ -58,9 +51,9 @@ function LastThirtyDays() {
                 );
               })
             ) : (
-              <p className="flex w-4/5 justify-center pr-3 text-2xl font-normal text-[#102a42]">
-                Sem gastos registrados no mês
-                {" " + (dayjs().month() + 1).toString().padStart(2, 0)}
+              <p className="flex w-full justify-center text-2xl font-normal text-[#102a42]">
+                Sem gastos registrados no mês de
+                {" " + months[dayjs().month() + 1]}
               </p>
             )}
           </div>

@@ -1,14 +1,15 @@
 const index = ({ children, categories }) => {
   return (
     <aside className="flex w-[12%] items-center">
-      <article className="flex h-[26rem] w-full flex-col justify-around rounded-br-md rounded-tr-md bg-[#F7F6FA] text-black shadow-md">
+      <article className="flex w-full flex-col justify-center gap-5 rounded-br-md rounded-tr-md bg-[#F7F6FA] py-5 text-black shadow-md">
         {children}
-        <article className="flex flex-col items-center gap-2">
+        <article className="flex flex-col items-center gap-3">
           <p className="text-xl font-semibold">Categorias</p>
           <div className="flex flex-col items-start gap-2 ">
             {categories.map((category) => {
               return (
                 <label
+                  key={category.name}
                   htmlFor={category.value}
                   className="flex flex-row-reverse gap-1"
                 >
