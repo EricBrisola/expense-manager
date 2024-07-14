@@ -1,10 +1,33 @@
 import { ExpensesContext } from "../../contexts/ExpensesContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import dayjs from "dayjs";
 
 const Form = () => {
   const { expense, handleSubmit, handleExpenseInputs, categories } =
     useContext(ExpensesContext);
+
+  const [value, setValue] = useState(expense.value);
+
+  const handleValueChange = (e) => {
+    let inputValue = e.target.value;
+
+    // Remove todos os caracteres que não são números
+    inputValue = inputValue.replace(/\D/g, "");
+
+    // Adiciona zeros à esquerda se necessário
+    while (inputValue.length < 3) {
+      inputValue = "0" + inputValue;
+    }
+
+    // Formata o valor para incluir a vírgula
+    const formattedValue = inputValue.slice(0, -2) + "," + inputValue.slice(-2);
+
+    // Remove zeros à esquerda desnecessários no lado dos reais
+    const finalValue = formattedValue.replace(/^0+(?!,)/, "");
+
+    // Se após a remoção dos zeros o valor estiver vazio, atribui "0,00"
+    setValue(finalValue === "" ? "0,00" : finalValue);
+  };
 
   //console.log(allExpenses);
   // console.log(expense);
@@ -39,12 +62,12 @@ const Form = () => {
           >
             <p className="text-lg font-semibold leading-none">Valor</p>
             <input
-              type="number"
+              type="text"
               name="value"
               className="h-12 w-56 rounded-md border-[1px] border-[#645cff] bg-transparent p-3 outline-none focus:border-2"
               id="new-expense-value-input"
-              value={expense.value}
-              onChange={handleExpenseInputs}
+              value={value}
+              onChange={handleValueChange}
               required
               placeholder="96,00"
               min={0}
