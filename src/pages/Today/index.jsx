@@ -7,8 +7,13 @@ import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 
 function Today() {
-  const { dailyTotal, dailyExpenses, deleteExpense, categories } =
-    useContext(ExpensesContext);
+  const {
+    dailyTotal,
+    dailyExpenses,
+    deleteExpense,
+    categories,
+    categoriesImgHashMap,
+  } = useContext(ExpensesContext);
 
   return (
     <main className="flex flex-1 bg-[#E2DEE9] text-white">
@@ -25,6 +30,7 @@ function Today() {
                     id={expense.id}
                     title={expense.title}
                     value={expense.value}
+                    categoryImg={categoriesImgHashMap[expense.category]}
                     deleteExpense={() => deleteExpense(expense.id)}
                   />
                 );

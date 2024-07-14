@@ -9,8 +9,13 @@ import Sidebar from "../../components/Sidebar";
 dayjs.extend(dayOfYear);
 
 const AllExpenses = () => {
-  const { allExpenses, allExpensesTotal, deleteExpense, categories } =
-    useContext(ExpensesContext);
+  const {
+    allExpenses,
+    allExpensesTotal,
+    deleteExpense,
+    categories,
+    categoriesImgHashMap,
+  } = useContext(ExpensesContext);
 
   const months = [
     { month: "Janeiro", value: "01" },
@@ -64,6 +69,7 @@ const AllExpenses = () => {
                     id={expense.id}
                     title={expense.title}
                     value={expense.value}
+                    categoryImg={categoriesImgHashMap[expense.category]}
                     deleteExpense={() => deleteExpense(expense.id)}
                   />
                 );

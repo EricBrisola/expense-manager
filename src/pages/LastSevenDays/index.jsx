@@ -9,8 +9,13 @@ import Sidebar from "../../components/Sidebar";
 dayjs.extend(isoWeek);
 
 const LastSevenDays = () => {
-  const { lastSevenDaysExpenses, weeklyTotal, deleteExpense, categories } =
-    useContext(ExpensesContext);
+  const {
+    lastSevenDaysExpenses,
+    weeklyTotal,
+    deleteExpense,
+    categories,
+    categoriesImgHashMap,
+  } = useContext(ExpensesContext);
 
   return (
     <main className="flex flex-1 bg-[#E2DEE9] text-white">
@@ -34,6 +39,7 @@ const LastSevenDays = () => {
                     id={expense.id}
                     title={expense.title}
                     value={expense.value}
+                    categoryImg={categoriesImgHashMap[expense.category]}
                     deleteExpense={() => deleteExpense(expense.id)}
                   />
                 );

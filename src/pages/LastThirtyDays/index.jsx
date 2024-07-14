@@ -6,8 +6,13 @@ import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 
 function LastThirtyDays() {
-  const { lastThirtyDaysExpenses, monthlyTotal, deleteExpense, categories } =
-    useContext(ExpensesContext);
+  const {
+    lastThirtyDaysExpenses,
+    monthlyTotal,
+    deleteExpense,
+    categories,
+    categoriesImgHashMap,
+  } = useContext(ExpensesContext);
 
   const months = {
     1: "janeiro",
@@ -46,6 +51,7 @@ function LastThirtyDays() {
                     id={expense.id}
                     title={expense.title}
                     value={expense.value}
+                    categoryImg={categoriesImgHashMap[expense.category]}
                     deleteExpense={() => deleteExpense(expense.id)}
                   />
                 );
