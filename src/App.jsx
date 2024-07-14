@@ -4,13 +4,18 @@ import router from "./routes/router";
 import { ExpensesContext } from "./contexts/ExpensesContext";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
+import foodIcon from "./assets/food-icon.png";
+import transportIcon from "./assets/transport-icon.png";
+import enterteinmentIcon from "./assets/enterteinment-icon.png";
+import homeIcon from "./assets/home-icon.png";
+import healthIcon from "./assets/health-icon.png";
 
 function App() {
   const [allExpenses, setAllExpenses] = useState([]);
   const [expense, setExpense] = useState({
     id: "",
     title: "",
-    value: "",
+    value: "0,00",
     category: "",
     date: dayjs().format("YYYY-MM-DD"),
   });
@@ -82,7 +87,7 @@ function App() {
 
   const categories = [
     {
-      name: "Comida",
+      name: "Alimentação",
       value: "food",
     },
     {
@@ -102,6 +107,14 @@ function App() {
       value: "health",
     },
   ];
+
+  const categoriesImgHashMap = {
+    food: foodIcon,
+    transport: transportIcon,
+    enterteinment: enterteinmentIcon,
+    home: homeIcon,
+    health: healthIcon,
+  };
 
   const dailyExpenses =
     allExpenses.length > 0
@@ -173,6 +186,7 @@ function App() {
         isModalOpen,
         allExpensesTotal,
         categories,
+        categoriesImgHashMap,
       }}
     >
       <RouterProvider router={router} />
