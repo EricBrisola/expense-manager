@@ -12,14 +12,15 @@ import healthIcon from "./assets/health-icon.png";
 
 function App() {
   const [allExpenses, setAllExpenses] = useState([]);
+  const [expenseValue, setExpenseValue] = useState("0,00");
   const [expense, setExpense] = useState({
     id: "",
     title: "",
-    value: "0,00",
-    category: "",
+    value: expenseValue,
+    category: "food",
     date: dayjs().format("YYYY-MM-DD"),
   });
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  //const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchAllExpenses = () => {
@@ -30,13 +31,34 @@ function App() {
     fetchAllExpenses();
   }, []);
 
-  const openModal = () => {
-    setIsModalOpen(true);
+  const handleExpenseValueChange = (e) => {
+    let inputValue = e.target.value;
+
+    // Remove todos os caracteres que não são números
+    inputValue = inputValue.replace(/\D/g, "");
+
+    // Adiciona zeros à esquerda se necessário
+    while (inputValue.length < 3) {
+      inputValue = "0" + inputValue;
+    }
+
+    // Formata o valor para incluir a vírgula
+    const formattedValue = inputValue.slice(0, -2) + "," + inputValue.slice(-2);
+
+    // Remove zeros à esquerda desnecessários no lado dos reais
+    const finalValue = formattedValue.replace(/^0+(?!,)/, "");
+
+    // Se após a remoção dos zeros o valor estiver vazio, atribui "0,00"
+    setExpenseValue(finalValue === "" ? "0,00" : finalValue);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  // const openModal = () => {
+  //   setIsModalOpen(true);
+  // };
+
+  // const closeModal = () => {
+  //   setIsModalOpen(false);
+  // };
 
   const handleExpenseInputs = (ev) => {
     setExpense((prev) => ({
@@ -50,7 +72,10 @@ function App() {
     ev.preventDefault();
 
     setAllExpenses((prev) => {
-      const updatedExpenses = [...prev, expense];
+      const updatedExpenses = [
+        ...prev,
+        { ...expense, value: expenseValue.replace(",", ".") },
+      ];
       localStorage.setItem("all-expenses", JSON.stringify(updatedExpenses));
       return updatedExpenses;
     });
@@ -59,9 +84,11 @@ function App() {
       ...expense,
       title: "",
       value: "",
-      category: "",
+      category: "food",
       date: dayjs().format("YYYY-MM-DD"),
     });
+
+    setExpenseValue("0,00");
   };
 
   const deleteExpense = (id) => {
@@ -172,18 +199,17 @@ function App() {
       value={{
         handleSubmit,
         handleExpenseInputs,
-        openModal,
-        closeModal,
+        handleExpenseValueChange,
         deleteExpense,
         allExpenses,
         expense,
+        expenseValue,
         dailyTotal,
         dailyExpenses,
         lastSevenDaysExpenses,
         weeklyTotal,
         lastThirtyDaysExpenses,
         monthlyTotal,
-        isModalOpen,
         allExpensesTotal,
         categories,
         categoriesImgHashMap,
