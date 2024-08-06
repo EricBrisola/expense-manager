@@ -17,7 +17,7 @@ const Form = () => {
   // console.log(customDate);
 
   return (
-    <section className="flex flex-1 flex-col items-center justify-center gap-16 bg-[#E2DEE9]">
+    <section className="flex flex-1 flex-col items-center justify-center gap-7 bg-[#E2DEE9]">
       <p className="text-2xl leading-none tracking-widest text-[#102a42]">
         Registre seus gastos!
       </p>
