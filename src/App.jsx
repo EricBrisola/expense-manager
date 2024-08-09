@@ -9,6 +9,7 @@ import transportIcon from "./assets/transport-icon.png";
 import enterteinmentIcon from "./assets/enterteinment-icon.png";
 import homeIcon from "./assets/home-icon.png";
 import healthIcon from "./assets/health-icon.png";
+import miscIcon from "./assets/miscellaneous-icon.png";
 
 function App() {
   const [allExpenses, setAllExpenses] = useState([]);
@@ -133,6 +134,10 @@ function App() {
       name: "Saúde",
       value: "health",
     },
+    {
+      name: "Diversos",
+      value: "miscellaneous",
+    },
   ];
 
   const categoriesImgHashMap = {
@@ -141,6 +146,7 @@ function App() {
     enterteinment: enterteinmentIcon,
     home: homeIcon,
     health: healthIcon,
+    miscellaneous: miscIcon,
   };
 
   const dailyExpenses =

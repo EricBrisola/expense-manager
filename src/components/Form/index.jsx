@@ -52,7 +52,6 @@ const Form = () => {
               value={expenseValue}
               onChange={handleExpenseValueChange}
               required
-              placeholder="96,00"
               min={0}
               step={0.01}
             />
