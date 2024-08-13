@@ -1,4 +1,11 @@
-const ExpenseCard = ({ id, title, value, deleteExpense, categoryImg }) => {
+const ExpenseCard = ({
+  id,
+  title,
+  value,
+  deleteExpense,
+  editExpense,
+  categoryImg,
+}) => {
   return (
     <article
       key={id}
@@ -11,15 +18,18 @@ const ExpenseCard = ({ id, title, value, deleteExpense, categoryImg }) => {
       <p className="text-md text-2xl font-medium text-[#102a42]">
         R${value.slice(0, 5).replace(".", ",")}
       </p>
-      <div className="flex w-full justify-center gap-5 rounded-b-md py-2">
-        <button className="h-6 w-14 rounded-md bg-green-700 px-1">
-          Editar
+      <div className="flex h-1/6 w-full rounded-b-md border-t-2 border-[#645cff]">
+        <button
+          className="w-1/2 rounded-bl-md border-r-[1px] border-[#645cff] text-green-700"
+          onClick={editExpense}
+        >
+          Alterar
         </button>
         <button
-          className="h-6 rounded-md bg-red-800 px-1 text-white"
+          className="w-1/2 rounded-br-md border-l-[1px] border-[#645cff] text-red-800"
           onClick={deleteExpense}
         >
-          Remover
+          Deletar
         </button>
       </div>
     </article>
