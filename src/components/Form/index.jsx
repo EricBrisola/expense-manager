@@ -91,41 +91,6 @@ const Form = () => {
           </button>
         </form>
       </article>
-      {/* {isModalOpen && (
-        <Modal closeModal={closeModal}>
-          <div className="flex h-36 w-48 flex-col items-center gap-2 rounded bg-purple-200 p-1">
-            <div className="flex w-full justify-end">
-              <button
-                type="button"
-                className="relative h-7 w-6 cursor-pointer rounded border-none bg-red-600 pb-1 text-white"
-                onClick={closeModal}
-              >
-                x
-              </button>
-            </div>
-            <div className="flex flex-col gap-3 ">
-              <input
-                type="date"
-                name="date"
-                className="h-7 w-[7.5rem] rounded outline-none"
-                onChange={(ev) => {
-                  hadleCustomDate(ev);
-                }}
-                value={customDate}
-              />
-              <button
-                className="h-7 w-[7.5rem] rounded-md bg-purple-400 text-white shadow-sm shadow-purple-400/20 duration-200 hover:shadow-lg hover:shadow-purple-400/40"
-                onClick={() => {
-                  saveChosenDate();
-                  closeModal();
-                }}
-              >
-                Save
-              </button>
-            </div>
-          </div>
-        </Modal>
-      )} */}
     </section>
   );
 };
