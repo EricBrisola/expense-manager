@@ -21,7 +21,7 @@ function App() {
     category: "food",
     date: dayjs().format("YYYY-MM-DD"),
   });
-  //const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchAllExpenses = () => {
@@ -53,13 +53,13 @@ function App() {
     setExpenseValue(finalValue === "" ? "0,00" : finalValue);
   };
 
-  // const openModal = () => {
-  //   setIsModalOpen(true);
-  // };
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
 
-  // const closeModal = () => {
-  //   setIsModalOpen(false);
-  // };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   const handleExpenseInputs = (ev) => {
     setExpense((prev) => ({
@@ -219,6 +219,9 @@ function App() {
         allExpensesTotal,
         categories,
         categoriesImgHashMap,
+        isModalOpen,
+        openModal,
+        closeModal,
       }}
     >
       <RouterProvider router={router} />
