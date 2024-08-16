@@ -102,6 +102,10 @@ function App() {
     });
   };
 
+  const editExpense = (id) => {
+    openModal();
+  };
+
   // const saveChosenDate = () => {
   //   setExpense((prev) => ({
   //     ...prev,
@@ -207,6 +211,7 @@ function App() {
         handleExpenseInputs,
         handleExpenseValueChange,
         deleteExpense,
+        editExpense,
         allExpenses,
         expense,
         expenseValue,
