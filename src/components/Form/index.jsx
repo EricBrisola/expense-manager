@@ -48,8 +48,6 @@ const Form = () => {
               value={expenseValue}
               onChange={handleExpenseValueChange}
               required
-              min={0}
-              step={0.01}
             />
           </label>
           <label
