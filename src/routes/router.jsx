@@ -5,12 +5,22 @@ import LastSevenDays from "../pages/LastSevenDays";
 import LastThirtyDays from "../pages/LastThirtyDays";
 import AllExpenses from "../pages/AllExpenses";
 import Form from "../components/Form";
+import Login from "../pages/Login";
+import SignUp from "../pages/SignUp";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
     children: [
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "sign-up",
+        element: <SignUp />,
+      },
       {
         path: "/",
         element: <Form />,
