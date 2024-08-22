@@ -1,6 +1,13 @@
 import GoogleLoginImage from "../../assets/google-login-image.png";
+import useRedirect from "../../hooks/useRedirect";
 
 const Login = () => {
+  const redirectTo = useRedirect();
+
+  const redirectToSignUpPage = () => {
+    redirectTo("/sign-up");
+  };
+
   return (
     <main className="flex flex-1 items-center justify-center bg-[#E2DEE9] text-[#102a42]">
       <section className="">
@@ -50,7 +57,10 @@ const Login = () => {
           </form>
           <article className="flex gap-1 pb-6">
             <p>Novo por aqui ? </p>
-            <button className="text-left font-bold text-[#645cff]">
+            <button
+              className="text-left font-bold text-[#645cff]"
+              onClick={redirectToSignUpPage}
+            >
               Crie uma conta
             </button>
           </article>
