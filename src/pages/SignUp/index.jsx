@@ -1,11 +1,53 @@
+import { useState } from "react";
 import GoogleLoginImage from "../../assets/google-login-image.png";
 import useRedirect from "../../hooks/useRedirect";
+import supabase from "../../API/client";
 
 const SignUp = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    passwordConfirm: "",
+  });
   const redirectTo = useRedirect();
 
   const redirectToLoginPage = () => {
     redirectTo("/login");
+  };
+
+  const handleChange = (ev) => {
+    setFormData({
+      ...formData,
+      [ev.target.name]: ev.target.value,
+    });
+  };
+
+  const handleSubmit = async (ev) => {
+    ev.preventDefault();
+    try {
+      if (formData.password != formData.passwordConfirm) {
+        throw new Error("Confirme sua senha corretamente!");
+      }
+
+      const { data, error } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          data: {
+            name: formData.name,
+          },
+        },
+      });
+      setFormData({
+        name: "",
+        email: "",
+        password: "",
+        passwordConfirm: "",
+      });
+    } catch (error) {
+      alert(`${error}`);
+    }
   };
 
   return (
@@ -15,35 +57,53 @@ const SignUp = () => {
           <p className="w-56 pt-6 text-3xl font-semibold leading-none">
             Cadastro
           </p>
-          <form className="flex flex-col gap-4 py-6">
-            <label htmlFor="login-input">
+          <form className="flex flex-col gap-4 py-6" onSubmit={handleSubmit}>
+            <label htmlFor="name-input">
+              <input
+                type="text"
+                name="name"
+                className="h-12 w-56 rounded-md border-[1px] border-[#645cff] bg-transparent p-3 outline-none focus:border-2"
+                id="name-input"
+                placeholder="Nome"
+                required
+                value={formData.name}
+                onChange={handleChange}
+              />
+            </label>
+            <label htmlFor="email-input">
               <input
                 type="email"
                 name="email"
                 className="h-12 w-56 rounded-md border-[1px] border-[#645cff] bg-transparent p-3 outline-none focus:border-2"
-                id="login-input"
+                id="email-input"
                 placeholder="Email"
                 required
+                value={formData.email}
+                onChange={handleChange}
               />
             </label>
             <label htmlFor="password-input">
               <input
                 type="password"
                 name="password"
-                className="h-12 w-56 rounded-md border-[1px] border-[#645cff] bg-transparent p-3 outline-none focus:border-2"
+                className={`h-12 ${"w-56"} rounded-md border-[1px] border-[#645cff] bg-transparent p-3 outline-none focus:border-2`}
                 id="password-input"
                 placeholder="Senha"
                 required
+                value={formData.password}
+                onChange={handleChange}
               />
             </label>
             <label htmlFor="password-confirm">
               <input
                 type="password"
-                name="password-confirm"
-                className="h-12 w-56 rounded-md border-[1px] border-[#645cff] bg-transparent p-3 outline-none focus:border-2"
+                name="passwordConfirm"
+                className={`h-12 ${"w-56"} rounded-md border-[1px] border-[#645cff] bg-transparent p-3 outline-none focus:border-2`}
                 id="password-confirm"
                 placeholder="Confirmar senha"
                 required
+                value={formData.passwordConfirm}
+                onChange={handleChange}
               />
             </label>
             <button className="rounded-md bg-[#645cff] p-2 text-white shadow-sm shadow-[#645cff]/20 duration-200 hover:shadow-lg hover:shadow-[#645cff]/40">
